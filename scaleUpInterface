@@ -1,0 +1,123 @@
+import java.util.Scanner;
+
+public class scaleUpInterface {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+	Scanner keyboard=new Scanner(System.in);
+		// TODO Auto-generated method stub
+System.out.println("Welcome to scaleUp! " +
+		"\r\nThis is an app for comparing the height weight ratios. " +
+		"\r\nEvery Wonder how much you would wiegh if you were 10 feet tall? " +
+		"\r\nThen you came to the right place!");
+System.out.println("Enter yes for metric wieght, anything imperial weight.");
+String metric=keyboard.next();
+boolean isMetric=(metric.equalsIgnoreCase("Yes") || metric.equals("yes"));
+if (isMetric)
+{
+	System.out.println("Enter your weight in kilograms");
+}
+else
+{
+	System.out.println("Enter your weight in pounds");
+}
+int weight=keyboard.nextInt();
+
+System.out.println("Enter yes or Yes for metric height, anything imperial height.");
+metric=keyboard.next();
+Person a;
+if (metric.equalsIgnoreCase("yes"))
+{
+	System.out.println("Enter your height in centimeters");
+ int cm=keyboard.nextInt();
+  a=new Person(weight, cm, isMetric);
+}
+else
+{
+	System.out.println("Enter your height number of feet first then number of inches.");
+	 int ft=keyboard.nextInt();
+	 int inch=keyboard.nextInt();
+	  a=new Person(weight, ft, inch, isMetric);
+}
+	
+	System.out.println("Do you want to find your new weight at a given height? " +
+			"\r\n if so enter 1." +
+			"\r\n Do you want to find your new height given a change in weight? " +
+			"\r\n if so enter 2." +
+			"Do you want to compare yourself to another person?" +
+			"\r\n If so enter 3");
+	 int choice=keyboard.nextInt();
+	switch (choice)
+	{
+	case 1:System.out.println("Enter a new height.");
+	System.out.println("Enter yes or Yes for metric height, anything imperial height.");
+	metric=keyboard.next();
+	double answer;
+	if (metric.equalsIgnoreCase("yes"))
+	{
+		System.out.println("Enter your height in centimeters");
+	 int cm=keyboard.nextInt();
+     answer= a.scaledWeight(cm);
+	}
+	 else
+	 {
+			System.out.println("Enter your height number of feet first then number of inches.");
+			 int ft=keyboard.nextInt();
+			 int inch=keyboard.nextInt();
+		answer=	 a.scaledWeight(ft, inch);
+		}
+	System.out.println("Your new weight would be "+answer+"kg or "+answer*2.20462+"lb.");
+	break;
+	case 2: 
+		System.out.println("Enter yes for metric wieght, anything imperial weight.");
+		String metric2=keyboard.next();
+		boolean isMetric2=(metric.equalsIgnoreCase("Yes") || metric.equals("yes"));
+		if (isMetric)
+		{
+			System.out.println("Enter your weight in kilograms");
+		}
+		else
+		{
+			System.out.println("Enter your weight in pounds");
+		}
+		int weight2=keyboard.nextInt();
+     double answer2=a.scaledHeight(weight2, isMetric2);
+     System.out.println("Your new height would be "+answer2+"cm or "+(answer2*0.393701-answer2*0.393701%12)/12+"ft and "+answer2*0.393701%12+"inches.");
+	
+	break;
+	case 3:System.out.println("Enter yes for metric wieght, anything imperial weight.");
+	String metricB=keyboard.next();
+	boolean isMetricB=(metricB.equalsIgnoreCase("Yes") || metricB.equals("yes"));
+	if (isMetric)
+	{
+		System.out.println("Enter the new person's weight in kilograms");
+	}
+	else
+	{
+		System.out.println("Enter the new person's weight in pounds");
+	}
+	int weightB=keyboard.nextInt();
+
+	System.out.println("Enter yes or Yes for metric height, anything imperial height.");
+	metricB=keyboard.next();
+	Person b;
+	if (metricB.equalsIgnoreCase("yes"))
+	{
+		System.out.println("Enter the new person's height in centimeters");
+	 int cmB=keyboard.nextInt();
+	  b=new Person(weightB, cmB, isMetricB);
+	}
+	else
+	{
+		System.out.println("Enter the new person's height number of feet first then number of inches.");
+		 int ftB=keyboard.nextInt();
+		 int inchB=keyboard.nextInt();
+		  b=new Person(weightB, ftB, inchB, isMetricB);
+	}
+	System.out.println("The new persons weight to height ratio is "+a.compareRatios(b)+"times your weight to height ratio.");
+	}
+ 
+}
+}
