@@ -1,0 +1,68 @@
+
+public class Person {
+
+	double height;
+	double volumeRatio=Math.pow(height, 3);
+	double weight;
+	double ratio;
+	double densityRatio=weight/volumeRatio;
+	
+	public Person ( int mass, int cm, boolean metricMass)
+	{
+		height=cm;
+		if (metricMass)
+		weight=mass;
+		else
+	   weight=mass*2.20462;
+		ratio=weight/height;
+		volumeRatio=Math.pow(height, 3);
+		densityRatio=weight/volumeRatio;
+	}
+	public Person ( int mass, int ft, double inch, boolean metricMass)
+	{
+		height=(ft*12+inch)*0.393701;
+		if (metricMass)
+			weight=mass;
+			else
+		   weight=mass/2.20462;
+		ratio=weight/height;
+
+		volumeRatio=Math.pow(height, 3);
+		densityRatio=weight/volumeRatio;
+	}
+	public double scaledHeight(int newMass, boolean metricMass)
+	{
+		double mass;
+		if (metricMass)
+		{
+		mass=newMass;
+		}
+		else
+		{
+		mass=newMass/2.20462;
+		}
+		double volRatio=mass/densityRatio; 
+
+		return Math.cbrt(mass/weight)*height;
+	}
+	public double scaledWeight(int cm)
+	{
+		return weight*Math.pow((cm/height),3);
+	}
+	public double scaledWeight(int ft, int inch)
+	{
+		double tempHeight=(ft*12+inch)*0.393701;
+		System.out.println("Density ratio is "+densityRatio);
+	return weight*Math.pow((tempHeight/height),3);
+	}
+	public double compareRatios(Person b)
+	{
+	 return b.densityRatio/densityRatio;
+	}
+		
+}
+
+
+
+
+
